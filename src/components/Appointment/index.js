@@ -4,6 +4,7 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
+import Status from "./Status";
 
 import "./styles.scss";
 import useVisualMode from "hooks/useVisualMode";
@@ -11,6 +12,7 @@ import useVisualMode from "hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
   function save(name, interviewer) {
@@ -18,8 +20,14 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview)
+      //Optimistic vs Pessimistic - M7W19 Creating Appointments; got error or UI was stuck after creating appointment;
+      //.then allows to wait for bookInterview to return before proceeding to transition(SHOW)
+      .then(() => {
+        transition(SHOW);
+      });
   }
 
   const { mode, transition, back } = useVisualMode(
@@ -44,6 +52,7 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
+      {mode === SAVING && <Status message={mode} />}
     </article>
   );
 }
