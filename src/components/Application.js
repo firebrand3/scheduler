@@ -15,6 +15,20 @@ import {
 export default function Application(props) {
   // const [day, setDay] = useState("");
   // const [days, setDays] = useState([]);
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    setState({ ...state, appointments });
+  }
 
   const [state, setState] = useState({
     day: "",
@@ -55,6 +69,7 @@ export default function Application(props) {
         key={appointment.id}
         interview={interview}
         interviewers={dailyInterviewers}
+        bookInterview={bookInterview}
       />
     );
   });
