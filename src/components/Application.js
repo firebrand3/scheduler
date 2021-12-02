@@ -13,6 +13,12 @@ import {
 } from "helpers/selectors";
 
 export default function Application(props) {
+  const [state, setState] = useState({
+    day: "",
+    days: [],
+    appointments: {},
+    interviewers: {},
+  });
   // const [day, setDay] = useState("");
   // const [days, setDays] = useState([]);
   function bookInterview(id, interview) {
@@ -26,12 +32,9 @@ export default function Application(props) {
       [id]: appointment,
     };
 
-    return axios
-      .put(`/api/appointments/${id}`, { interview })
-      .then(() => {
-        setState({ ...state, appointments });
-      })
-      .catch((error) => console.log(error.response));
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      setState({ ...state, appointments });
+    });
   }
 
   function cancelInterview(id) {
@@ -45,20 +48,11 @@ export default function Application(props) {
       [id]: appointment,
     };
 
-    return axios
-      .delete(`/api/appointments/${id}`)
-      .then(() => {
-        setState({ ...state, appointments });
-      })
-      .catch((error) => console.log(error.response));
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      setState({ ...state, appointments });
+    });
   }
 
-  const [state, setState] = useState({
-    day: "",
-    days: [],
-    appointments: {},
-    interviewers: {},
-  });
 
   const setDay = (day) => setState({ ...state, day });
   const dailyAppointments = getAppointmentsForDay(state, state.day);
