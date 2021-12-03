@@ -1,3 +1,4 @@
+//**********Helper function that returns and array of appointments for each day
 export function getAppointmentsForDay(state, day) {
   const appointmentsForDay = [];
 
@@ -21,6 +22,7 @@ export function getAppointmentsForDay(state, day) {
   return appointmentsForDay;
 }
 
+//**********Helper function that returns student and interviewer for a given appointment
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
@@ -31,6 +33,7 @@ export function getInterview(state, interview) {
   };
 }
 
+//**********Helper function that returns an array of interviewers on a given day
 export function getInterviewersForDay(state, day) {
   const interviewersForDay = [];
 
@@ -45,8 +48,6 @@ export function getInterviewersForDay(state, day) {
   }
 
   const interviewerArray = filteredDays[0].interviewers;
-
-  console.log(interviewerArray);
 
   for (const interviewer of interviewerArray) {
     if (state.interviewers[interviewer]) {

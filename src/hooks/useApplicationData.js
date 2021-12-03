@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+//************************************************************Custom Hook function to seperate concerns; manage API calls to fetch,
+//************************************************************edit and delete appointment data
 export default function useApplicationData() {
+  //**********set initial state
   const [state, setState] = useState({
     day: "",
     days: [],
@@ -9,8 +12,10 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
+  //**********function to setDay when user clicks a specific day
   const setDay = (day) => setState({ ...state, day });
 
+  //**********useEffect hook make api call to fetch data and set state based on response
   useEffect(() => {
     Promise.all([
       Promise.resolve(axios.get("/api/days")),
@@ -26,8 +31,8 @@ export default function useApplicationData() {
     });
   }, []);
 
+  //**********function to book interview by making api edit call and update spots
   function bookInterview(id, interview) {
-    console.log(state.days);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -51,6 +56,7 @@ export default function useApplicationData() {
     });
   }
 
+  //**********function to cancel interview by making api delete call and update spots
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],

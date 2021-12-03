@@ -53,6 +53,8 @@ const state = {
   },
 };
 
+//************************************************************JEST test to validate selector functions
+
 // -----------------------------------------
 
 test("getAppointmentsForDay returns an array", () => {
