@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "components/InterviewerListItem.scss";
 
 import classNames from "classnames";
 
+//**************************Receives prorps from InterviewList component and renders selected interviewer
 export default function InterviewerListItem(props) {
-  // const [interviewer, setInterviever] = useState();
-
   let interviewerClass = classNames({
     interviewers__item: true,
     "interviewers__item--selected": props.selected,
@@ -14,17 +13,12 @@ export default function InterviewerListItem(props) {
 
   return (
     <>
-      <li
-        className={interviewerClass}
-        onClick={props.setInterviewer}
-        // selected={props.selected}
-      >
+      <li className={interviewerClass} onClick={props.setInterviewer}>
         <img
           className="interviewers__item-image"
           src={props.avatar}
           alt={props.name}
         />
-        {/* {props.selected && <h3 className={interviewerClass}>{props.name}</h3>} */}
         {props.selected && props.name}
       </li>
     </>
