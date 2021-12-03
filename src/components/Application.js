@@ -11,17 +11,21 @@ import {
 } from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
-export default function Application(props) {
+//**************************Application component; passes props to Appointment and DayList components
+//**************************uses custom hooks for data management
+export default function Application() {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
+  //**************************just for reference
   // const setDays = days => setState({ ...state, days });
   // const setDays = days => setState(prev => ({ ...prev, days }));
   // const setDays = days => setState(Object.assign({}, state, {days}));
   // const setDays = days => setState(prev => (Object.assign({}, prev, {days})));
+  //**************************
 
   const arrayOfAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);

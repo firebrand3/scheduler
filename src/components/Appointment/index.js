@@ -21,6 +21,8 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
+//**************************Appointment component; receives props from Application component
+//**************************uses custom hook to set modes and pass props to other components to render appointments
 export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
