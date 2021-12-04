@@ -20,7 +20,7 @@ Interview Scheduler is a SPA (Single Page Application) for tracking student inte
 
 - Front-End: React, Axios, JSX, HTML, SASS, JavaScript
 - Back-End: Express, Node.js, PostgreSQL
-- Testing: Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
+- Testing: Storybook, Webpack Dev Server, Jest
 
 ## Dependencies
 
