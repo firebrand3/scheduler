@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 export default function useApplicationData() {
   //**********set initial state
   const [state, setState] = useState({
-    day: "",
+    day: "Monday", //set day state to use Monday as default selected day when app loads
     days: [],
     appointments: {},
     interviewers: {},
@@ -44,7 +44,8 @@ export default function useApplicationData() {
     };
 
     const days = state.days.map((theDay) => {
-      if (theDay.name === state.day) {
+      if (!state.appointments[id].interview && theDay.name === state.day) {
+        //fix bug that changed spots when an appointment was edited
         return { ...theDay, spots: theDay.spots - 1 };
       } else {
         return theDay;
