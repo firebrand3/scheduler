@@ -20,11 +20,16 @@ const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
+const EMPTY_FORM = "EMPTY_FORM"; //add a new error mode to prevent saving empty appoitments
 
 //**************************Appointment component; receives props from Application component
 //**************************uses custom hook to set modes and pass props to other components to render appointments
 export default function Appointment(props) {
   function save(name, interviewer) {
+    if (name === "" || !interviewer) {
+      transition(EMPTY_FORM, true);
+      return;
+    }
     const interview = {
       student: name,
       interviewer,
@@ -98,6 +103,12 @@ export default function Appointment(props) {
       {mode === ERROR_DELETE && (
         <Error
           message={"Could not delete appointment"}
+          onClose={() => back()}
+        />
+      )}
+      {mode === EMPTY_FORM && (
+        <Error
+          message={"Student name is blank or interviewer is not selected"}
           onClose={() => back()}
         />
       )}
