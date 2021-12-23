@@ -14,21 +14,21 @@ describe("Form", () => {
       avatar: "https://i.imgur.com/LpaY82x.png",
     },
   ];
-
+  /* test number one */
   it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
       <Form interviewers={interviewers} />
     );
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
   });
-
+  /* test number two */
   it("renders with initial student name", () => {
     const { getByTestId } = render(
       <Form interviewers={interviewers} student="Lydia Miller-Jones" />
     );
     expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
-
+  /* test number three */
   it("validates that the student name is not blank", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn();
@@ -42,7 +42,7 @@ describe("Form", () => {
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
   });
-
+  /* test number four */
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
@@ -64,7 +64,7 @@ describe("Form", () => {
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
-
+  /* test number five */
   it("calls onCancel and resets the input field", () => {
     const onCancel = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
