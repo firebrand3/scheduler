@@ -82,16 +82,14 @@ export default {
     }
   }),
 
-  put: jest.fn((url) => {
-    if (url === "/api/days") {
+  put: jest.fn(() => {
       return Promise.resolve({
         status: 204,
         statusText: "No Content",
       });
-    }
   }),
 
-  delete: jest.fn((url) => {
+  delete: jest.fn(() => {
       return Promise.resolve({
         status: 204,
         statusText: "No Content",
